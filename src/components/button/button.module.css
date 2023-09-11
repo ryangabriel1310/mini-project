@@ -1,0 +1,19 @@
+.button {
+  border-radius: 10px;
+  border-width: 2px;
+  background-color: green;
+  padding: 10px 40px 10px 40px;
+}
+
+.disabled {
+  background-color: grey;
+}
+
+.button:active:hover {
+  opacity: 80%;
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
