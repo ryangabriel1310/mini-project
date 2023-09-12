@@ -2,7 +2,9 @@ import { ButtonHTMLAttributes, ForwardedRef, forwardRef } from 'react';
 
 import styles from './button.module.css';
 
-export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {}
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  color?: string;
+}
 
 // export default function Button({ children, disabled, ref }: ButtonProps) {
 //   return (
@@ -12,8 +14,8 @@ export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {}
 //   )
 // }
 
-const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
-  const { children, disabled } = props;
+const Button = forwardRef(function Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
+  const { color, children, disabled } = props;
   return (
     <button ref={ref} className={`${styles.button} ${disabled && styles.disabled}`}>
       {children}

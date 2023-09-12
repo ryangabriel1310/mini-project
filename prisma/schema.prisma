@@ -6,18 +6,12 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
-}
-
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
 }
 
 // Necessary for Next auth
@@ -49,12 +43,32 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
+    name          String
+    email         String    @unique
     emailVerified DateTime?
-    image         String?
+    phoneNumber   String    @unique
     accounts      Account[]
     sessions      Session[]
+    tier          Tier      @default(f)
+}
+
+model Item {
+    id          String   @id @default(uuid())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    category    Category
+    type        Type
+    title       String
+    description String
+    imageUrl    String
+    priceA      Int
+    priceB      Int
+    priceC      Int
+    priceD      Int
+    priceE      Int
+    priceF      Int
+
+    @@index(fields: [category], type: Hash)
 }
 
 model VerificationToken {
@@ -63,4 +77,26 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+enum Category {
+    speaker
+    electricFan
+    blender
+    flashlight
+}
+
+enum Type {
+    a
+    b
+    c
+}
+
+enum Tier {
+    a
+    b
+    c
+    d
+    e
+    f
 }

@@ -4,12 +4,25 @@
   gap: 50px;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+}
+
 .image {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 150px;
   background-color: red;
 }
 
 .description {
   line-height: 26px;
+}
+
+.collapsible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
