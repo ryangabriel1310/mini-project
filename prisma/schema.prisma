@@ -57,15 +57,15 @@ model Item {
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     category    Category
-    type        Type
-    title       String
-    description String
-    imageUrl    String
-    priceA      Int
-    priceB      Int
-    priceC      Int
-    priceD      Int
-    priceE      Int
+    type        String
+    title       String   @db.VarChar()
+    description String   @db.VarChar(500)
+    imageUrl    String?
+    priceA      Int?
+    priceB      Int?
+    priceC      Int?
+    priceD      Int?
+    priceE      Int?
     priceF      Int
 
     @@index(fields: [category], type: Hash)
@@ -84,12 +84,6 @@ enum Category {
     electricFan
     blender
     flashlight
-}
-
-enum Type {
-    a
-    b
-    c
 }
 
 enum Tier {

@@ -1,3 +1,5 @@
+import styles from './dropdown.module.css';
+
 export interface DropdownProps extends React.HTMLProps<HTMLSelectElement> {
   options: string[];
 }
@@ -7,8 +9,8 @@ export default function Dropdown({ options }: DropdownProps) {
     <>
       <label htmlFor="category">Categories</label>
       <select name="category" id="category">
-        {options.map((option, index) => (
-          <option key={index} value={option}>
+        {options.map((option) => (
+          <option className={styles.option} key={option} value={option}>
             {option}
           </option>
         ))}

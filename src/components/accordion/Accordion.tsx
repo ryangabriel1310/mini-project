@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import styles from './accordion.module.css';
-import type { IAccordionItem } from '~/interfaces';
 import AccordionItem from './AccordionItem';
 
+import { type Item } from '@prisma/client';
+
 export interface AccordionProps {
-  items: IAccordionItem[];
+  items?: Item[];
 }
 
-export default function Accordion({ items }: AccordionProps) {
+export default function Accordion({ items = [] }: AccordionProps) {
   const [isOpenedArr, setIsOpenedArr] = useState<boolean[]>(items.map(() => false));
 
   return (

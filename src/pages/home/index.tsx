@@ -5,40 +5,32 @@ import type { IAccordionItem } from '~/interfaces';
 import styles from './home.module.css';
 import { api } from '~/utils/api';
 
+import { Category } from '@prisma/client';
+import Head from 'next/head';
+import { getTitleCaseFromCamelCase } from '~/utils';
+
+const options = Object.keys(Category).map((category) => getTitleCaseFromCamelCase(category));
+
 export default function Home() {
-  const { data } = api.example.getItems.useQuery();
+  const { data } = api.items.getItems.useQuery();
 
   function handleSelect(e: SyntheticEvent<HTMLSelectElement, Event>) {
     return null;
   }
 
   return (
-    <main className={styles.main}>
-      <h2>Welcome to the store!</h2>
-      <Dropdown options={options} onSelect={handleSelect} />
-      <Accordion items={defaultItems} />
-    </main>
+    <>
+      <Head>
+        <title>Welcome to the store</title>
+        <meta name="description" />
+      </Head>
+      <main className={styles.background}>
+        <div className={styles.mainColumn}>
+          <h2>Welcome to the store!</h2>
+          <Dropdown options={options} onSelect={handleSelect} />
+          <Accordion items={data} />
+        </div>
+      </main>
+    </>
   );
 }
-
-const options = ['Speaker', 'Electric Fan', 'Blender', 'Flashlight'];
-const defaultItems: IAccordionItem[] = [
-  {
-    id: '1',
-    title: 'Speaker A',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum maiores praesentium similique nemo obcaecati voluptate sit saepe, eaque veniam ut dicta voluptatum minima maxime vel. Distinctio amet possimus molestiae soluta.',
-  },
-  {
-    id: '2',
-    title: 'Speaker B',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum maiores praesentium similique nemo obcaecati voluptate sit saepe, eaque veniam ut dicta voluptatum minima maxime vel. Distinctio amet possimus molestiae soluta.',
-  },
-  {
-    id: '3',
-    title: 'Speaker C',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum maiores praesentium similique nemo obcaecati voluptate sit saepe, eaque veniam ut dicta voluptatum minima maxime vel. Distinctio amet possimus molestiae soluta.',
-  },
-];
