@@ -8,21 +8,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 500px;
+  max-width: 300px;
+  border: 1px solid green;
+}
+
+.clickable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border: 1px solid red;
 }
 
 .image {
   height: 200px;
   width: 150px;
   background-color: red;
+  margin-bottom: 10px;
 }
 
 .description {
-  line-height: 26px;
+  margin: 0 30px 0 30px;
+  margin-bottom: 20px;
 }
 
 .collapsible {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: hidden;
+  transition-duration: 0.5s;
 }

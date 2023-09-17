@@ -1,21 +1,34 @@
 import { useState } from 'react';
-import styles from './accordion.module.css';
+
+import { type Product } from '@prisma/client';
+
 import AccordionItem from './AccordionItem';
 
-import { type Item } from '@prisma/client';
+import styles from './accordion.module.css';
 
 export interface AccordionProps {
-  items?: Item[];
+  createHandleClick?: (product?: Product) => () => void;
+  products?: Product[];
 }
 
-export default function Accordion({ items = [] }: AccordionProps) {
-  const [isOpenedArr, setIsOpenedArr] = useState<boolean[]>(items.map(() => false));
+export default function Accordion({ products = [], createHandleClick }: AccordionProps) {
+  const [isOpenedArr, setIsOpenedArr] = useState<boolean[]>(products.map(() => false));
 
   return (
     <div className={styles.container}>
-      {items.map((item, index) => (
-        <AccordionItem key={item.id} index={index} item={item} isOpenedArr={isOpenedArr} setIsOpenedArr={setIsOpenedArr} />
-      ))}
+      {products.map((product, index) => {
+        const handleClick = createHandleClick?.(product);
+        return (
+          <AccordionItem
+            handleClick={handleClick}
+            index={index}
+            product={product}
+            isOpenedArr={isOpenedArr}
+            key={product.id}
+            setIsOpenedArr={setIsOpenedArr}
+          />
+        );
+      })}
     </div>
   );
 }

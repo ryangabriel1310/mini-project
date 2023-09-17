@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  color: black;
+}
+
+.confirm {
+  margin-bottom: 10px;
+}
+
+.countContainer {
+  display: flex;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input {
+  width: 100px;
+  text-align: center;
+  padding: 0 10px 0 10px;
+}

@@ -1,17 +1,28 @@
 import { useRef, type CSSProperties, type SetStateAction } from 'react';
-import type { IAccordionItem } from '~/interfaces';
 
-import styles from './accordion.module.css';
+import { type Product } from '@prisma/client';
+
 import Button from '../button/Button';
 
+import styles from './accordion.module.css';
+
+const BORDER_RADIUS = 30;
+
 interface AccordionItemProps {
+  handleClick?: () => void;
   index: number;
-  item: IAccordionItem;
+  product: Product;
   isOpenedArr: boolean[];
   setIsOpenedArr: (value: SetStateAction<boolean[]>) => void;
 }
 
-export default function AccordionItem({ index, item, isOpenedArr, setIsOpenedArr }: AccordionItemProps) {
+export default function AccordionItem({
+  handleClick,
+  index,
+  product,
+  isOpenedArr,
+  setIsOpenedArr,
+}: AccordionItemProps) {
   const collapsibleRef = useRef<HTMLDivElement>(null);
 
   function createHandleOpen(index: number) {
@@ -26,24 +37,44 @@ export default function AccordionItem({ index, item, isOpenedArr, setIsOpenedArr
     };
   }
 
-  function createCollapsibleStyle(index: number): CSSProperties {
-    return {
-      height: isOpenedArr[index] ? `${collapsibleRef.current?.scrollHeight}px` : 0,
-      overflowY: 'hidden',
-      transitionDuration: '0.5s',
-    };
-  }
-
   return (
-    <div className={styles.card}>
-      <button className={styles.card} onClick={createHandleOpen(index)} key={item.id}>
-        <p>{item.title}</p>
+    <div className={styles.card} style={{ borderRadius: BORDER_RADIUS }}>
+      <button
+        className={styles.clickable}
+        style={createClickableStyle(isOpenedArr[index])}
+        onClick={createHandleOpen(index)}
+        key={product.id}
+      >
+        <p>{product.title}</p>
         <div className={styles.image} />
       </button>
-      <div className={styles.collapsible} ref={collapsibleRef} style={createCollapsibleStyle(index)}>
-        <p className={styles.description}>{item.description}</p>
-        <Button>Next</Button>
+      <div
+        className={styles.collapsible}
+        ref={collapsibleRef}
+        style={createCollapsibleStyle(isOpenedArr[index], collapsibleRef.current?.scrollHeight)}
+      >
+        <p className={styles.description}>{product.description}</p>
+        <Button onClick={handleClick}>Next</Button>
       </div>
     </div>
   );
+}
+
+function createClickableStyle(isOpened?: boolean): CSSProperties {
+  if (isOpened) {
+    return {
+      borderTopLeftRadius: BORDER_RADIUS,
+      borderTopRightRadius: BORDER_RADIUS,
+    };
+  }
+  return {
+    borderRadius: BORDER_RADIUS,
+  };
+}
+
+function createCollapsibleStyle(isOpened?: boolean, height?: number): CSSProperties {
+  return {
+    height: isOpened ? height : 0,
+    marginBottom: isOpened ? 10 : 0,
+  };
 }

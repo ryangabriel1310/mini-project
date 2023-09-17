@@ -33,4 +33,4 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
    `npx prisma db push`
 
 2. To seed the database
-   `npx`
+   `npx prisma db seed`

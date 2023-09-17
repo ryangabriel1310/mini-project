@@ -5,41 +5,46 @@ const loremText =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero ducimus, soluta odit laboriosam aperiam sapiente inventore, odio, aut sit qui quam repudiandae magnam quidem assumenda amet. At modi consectetur ratione!';
 
 async function main() {
-  await prisma.item.createMany({
+  await prisma.product.createMany({
     data: [
       {
         category: 'speaker',
-        type: 'JBL',
+        subCategory: 'JBL',
         title: 'JBL Type A',
         description: loremText,
+        stock: 10,
         priceF: 100000,
       },
       {
         category: 'speaker',
-        type: 'JBL',
+        subCategory: 'JBL',
         title: 'JBL Type B',
         description: loremText,
+        stock: 3,
         priceF: 100000,
       },
       {
         category: 'speaker',
-        type: 'JBL',
+        subCategory: 'JBL',
         title: 'JBL Type C',
         description: loremText,
+        stock: 5,
         priceF: 100000,
       },
       {
         category: 'speaker',
-        type: 'Sony',
+        subCategory: 'Sony',
         title: 'Sony Type A',
         description: loremText,
+        stock: 10,
         priceF: 100000,
       },
       {
         category: 'speaker',
-        type: 'Sony',
+        subCategory: 'Sony',
         title: 'Sony Type B',
         description: loremText,
+        stock: 15,
         priceF: 100000,
       },
     ],

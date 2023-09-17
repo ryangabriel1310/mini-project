@@ -10,4 +10,14 @@
   width: 100%;
   max-width: 1280px;
   border: 1px solid red;
+  padding-top: 50px;
+  min-height: 100vh;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  margin-bottom: 20px;
 }
