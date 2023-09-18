@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-size: var(--font-default);
   color: black;
   background-color: white;
